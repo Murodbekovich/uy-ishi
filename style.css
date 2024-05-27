@@ -1,0 +1,119 @@
+@font-face {
+    font-family: "inter-semibold";
+    src: url("./assets/fonts/static/Inter-SemiBold.ttf");
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+
+a {
+    padding: 15px 80px;
+}
+
+a {
+    display: block;
+    background-color: hsl(0, 0%, 20%);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: "inter-semibold";
+    margin-top: 14px;
+    font-size: 14px;
+}
+
+#asosiy {
+    padding: 30px;
+    border-radius: 12px;
+    background-color:hsl(0, 0%, 12%);
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: hsl(0, 0%, 8%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+:root {
+    view-transition-name: root;
+}
+
+html {
+    display: block;
+}
+
+a:hover {
+    background-color: hsl(75, 94%, 57%);
+    color: hsl(0, 0%, 8%);
+}
+
+.name {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+}
+
+.place {
+    margin-top: -8px;
+    font-size: 14px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: hsl(75, 94%, 57%);
+}
+
+.speciality {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: white;
+}
+
+#container img {
+    margin-bottom: 5px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+
+
+#container {
+    padding: 30px;
+    border-radius: 12px;
+    background-color: hsl(0, 0%, 12%);
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+a {
+    padding: 15px 80px;
+}
+  
+#container {
+    padding: 24px;
+}
+  
+#container img {
+    width: 88px;
+    height: 88px;
+}
+
+#asosiy img {
+    width: 88px;
+    height: 88px;
+}
+}
+#asosiy img {
+    margin-bottom: 5px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+
+.link {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
