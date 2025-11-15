@@ -1,43 +1,24 @@
+import { InjectModel } from '@nestjs/sequelize';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateAuthDto, LoginDto } from './dto/create-auth.dto';
+import { RegisterDto } from './dto/create-auth.dto';
+import { Auth } from './entities/auth.entity';
+import * as bcrypt from "bcrypt"
 
 @Injectable()
 export class AuthService {
-  private userList: any = [
-    {
-      id: 1,
-      username: "Ali",
-      email: "dcsdcd",
-      password: "sdcdc"
-    },
-    {
-      id: 2,
-      username: "Bunyod",
-      email: "dcsdcd",
-      password: "sdcdc"
-    },
-  ]
-  async register(createAuthDto: CreateAuthDto) {
-    const { username, email, password } = createAuthDto
+  constructor(@InjectModel(Auth) private authModel: typeof Auth) { }
+  async register(registerDto: RegisterDto) {
+    const { username, email, password } = registerDto
+    const user = await this.authModel.findOne({ where: { email } })
 
-    const foundedUser = this.userList.find(user => user.email === email)
+    if (user) throw new BadRequestException("User alerady exitst")
 
-    if(foundedUser) throw new BadRequestException("User alerady exisist")
+    const hashPassword = await bcrypt.hash(password, 12)
 
-    this.userList.push(createAuthDto)
+    const randomPassword = +Array.from({length: 6}, () => Math.floor(Math.random() * 10)).join("")
 
-    return {message: "Registered"}
+
+    // await this this.authModel.create({username, email, hashPassword})
+    return
   }
-
-  login(loginDto: LoginDto) {
-    const { username, password } = loginDto
-    const foundedUser = this.userList.find(item => item.username === username)
-    const passwordVerify = this.userList.find(item => item.password === password)
-
-    if (!foundedUser || !passwordVerify) {
-      throw new BadRequestException("parol yoki foydalanuvchi nomi xato")
-    }
-    return btoa(foundedUser.username);
-  }
-
 }
