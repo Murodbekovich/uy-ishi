@@ -3,9 +3,17 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { RegisterDto } from './dto/create-auth.dto';
 import { Auth } from './entities/auth.entity';
 import * as bcrypt from "bcrypt"
+import nodemailer from "nodemailer"
 
 @Injectable()
 export class AuthService {
+  private transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "amatovbunyodbek671@gmail.com",
+      pass: process.env.API_KEY
+    }
+  })
   constructor(@InjectModel(Auth) private authModel: typeof Auth) { }
   async register(registerDto: RegisterDto) {
     const { username, email, password } = registerDto
@@ -15,10 +23,11 @@ export class AuthService {
 
     const hashPassword = await bcrypt.hash(password, 12)
 
-    const randomPassword = +Array.from({length: 6}, () => Math.floor(Math.random() * 10)).join("")
+    const randomNumber = +Array.from({length: 6}, () => Math.floor(Math.random() * 10)).join("")
 
+    const otpTime = Date.now() + 120000
 
-    // await this this.authModel.create({username, email, hashPassword})
-    return
+    await this.authModel.create({username, email, hashPassword, otp: randomNumber, otpTime})
+    // return
   }
 }
